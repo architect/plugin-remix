@@ -33,4 +33,6 @@ architect/plugin-remix
 
 ## Example
 
+[Example app](./example/)
+
 ## Caveats
