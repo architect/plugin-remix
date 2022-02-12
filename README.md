@@ -33,6 +33,6 @@ architect/plugin-remix
 
 ## Example
 
-[Example app](./example/)
+[Example app](https://github.com/architect/plugin-remix/tree/main/example)
 
 ## Caveats
