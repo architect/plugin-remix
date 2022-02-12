@@ -78,13 +78,13 @@ jobs:
       # Publish to npm
       - name: Publish @RC to npm
         if: contains(github.ref, 'RC')
-        run: npm publish --tag RC
+        run: npm publish --tag RC --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @latest to npm
         if: contains(github.ref, 'RC') == false #'!contains()'' doesn't work lol
-        run: npm publish
+        run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
