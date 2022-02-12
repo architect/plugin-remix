@@ -1,20 +1,21 @@
 const { copyFileSync, existsSync, mkdirSync, rmSync } = require('fs')
 const { join } = require('path')
-const { BUILD_DIR, MY_NAME, REMIX_OVERWRITES } = require('./constants')
+const { BUILD_DIR, MY_NAME, REMIX_OVERRIDES } = require('./constants')
+
+// ! Use of Remix internals. API not guaranteed:
 const remixConfig = require('@remix-run/dev/config')
 
 /**
- *
- * @description merge defaults and plugin options to create plugin and Remix config
+ * Merge defaults and plugin options to create plugin and "initial" Remix config
  * @param {*} arc
- * @returns { { pluginConfig: object, mergedRemixConfig: object } }
+ * @returns { { pluginConfig: object, initialRemixConfig: object } }
  */
-function mergeConfig (arc) {
-  const mergedRemixConfig = { ...REMIX_OVERWRITES }
+function createPluginConfigs (arc) {
+  const initialRemixConfig = { ...REMIX_OVERRIDES }
   const pluginConfig = {
-    // defaults
+    // Arc plugin-remix defaults
     mount: '/*',
-    appDirectory: MY_NAME,
+    appDirectory: 'app', // best to support Remix defaults
     buildDirectory: BUILD_DIR,
     serverDirectory: `${BUILD_DIR}/server`,
     serverHandler: join(__dirname, 'server', 'index.js'),
@@ -28,7 +29,7 @@ function mergeConfig (arc) {
 
       if (name === 'app-directory') {
         pluginConfig.appDirectory = value
-        mergedRemixConfig.appDirectory = value
+        initialRemixConfig.appDirectory = value
       }
       else if (name === 'mount') {
         pluginConfig.mount = value
@@ -40,24 +41,23 @@ function mergeConfig (arc) {
         pluginConfig.buildDirectory = value
         pluginConfig.serverDirectory = `${value}/server`
 
-        for (const key in mergedRemixConfig) {
-          mergedRemixConfig[key] = mergedRemixConfig[key].replace(BUILD_DIR, value)
+        for (const key in initialRemixConfig) {
+          initialRemixConfig[key] = initialRemixConfig[key].replace(BUILD_DIR, value)
         }
       }
     }
   }
 
-  return { pluginConfig, mergedRemixConfig }
+  return { pluginConfig, initialRemixConfig }
 }
 
 /**
- *
- * @description create Arc handler for Remix server
+ * Create Arc handler for Remix server
  * @param {*} inv
  * @returns {void}
  */
 function createServerHandler (inv) {
-  const { pluginConfig } = mergeConfig(inv._project.arc)
+  const { pluginConfig } = createPluginConfigs(inv._project.arc)
 
   if (!existsSync(pluginConfig.serverDirectory))
     mkdirSync(pluginConfig.serverDirectory, { recursive: true })
@@ -66,41 +66,39 @@ function createServerHandler (inv) {
 }
 
 /**
- *
- * @description generate full Remix config
+ * Generate full Remix config
  * @param {*} inv
  * @returns {Promise<remixConfig.RemixConfig>}
  */
-async function generateConfig (inv) {
+async function createFinalRemixConfig (inv) {
   const {
     _project: { arc, cwd },
   } = inv
 
   const existingConfig = await remixConfig.readConfig(cwd)
-  const { mergedRemixConfig } = mergeConfig(arc)
+  const { initialRemixConfig } = createPluginConfigs(arc)
 
   return {
     ...existingConfig,
-    ...mergedRemixConfig, // overwrite build directories
+    ...initialRemixConfig, // overwrite build directories
   }
 }
 
 /**
- *
- * @description removes Remix build artifacts
+ * Removes Remix build artifacts
  * @param {*} inv
  * @returns {void}
  */
 function cleanup (inv) {
-  const { mergedRemixConfig, pluginConfig } = mergeConfig(inv._project.arc)
+  const { initialRemixConfig, pluginConfig } = createPluginConfigs(inv._project.arc)
 
-  rmSync(mergedRemixConfig.assetsBuildDirectory, { recursive: true, force: true })
+  rmSync(initialRemixConfig.assetsBuildDirectory, { recursive: true, force: true })
   rmSync(pluginConfig.buildDirectory, { recursive: true, force: true })
 }
 
 module.exports = {
   cleanup,
   createServerHandler,
-  generateConfig,
-  mergeConfig,
+  createFinalRemixConfig,
+  createPluginConfigs,
 }

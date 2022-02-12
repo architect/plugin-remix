@@ -1,8 +1,14 @@
 const { fork } = require('child_process')
 const { join } = require('path')
 const { MY_NAME } = require('./constants')
-const { cleanup, createServerHandler, generateConfig, mergeConfig } = require('./util')
-// risky use of Remix internals:
+const {
+  cleanup,
+  createServerHandler,
+  createFinalRemixConfig,
+  createPluginConfigs
+} = require('./util')
+
+// ! Use of Remix internals. API not guaranteed:
 const { BuildMode } = require('@remix-run/dev/build')
 const remixCompiler = require('@remix-run/dev/compiler')
 
@@ -14,7 +20,7 @@ function setHttp ({ inventory: { inv } }) {
   } = inv
 
   if (arc[MY_NAME]) {
-    const { pluginConfig } = mergeConfig(arc)
+    const { pluginConfig } = createPluginConfigs(arc)
 
     return {
       method: 'any',
@@ -30,12 +36,10 @@ async function sandboxStart ({ inventory: { inv } }) {
   } = inv
 
   if (arc[MY_NAME]) {
-    const config = await generateConfig(inv)
-
     console.log('Arc is starting Remix watch...')
 
+    const config = await createFinalRemixConfig(inv)
     createServerHandler(inv)
-
     watcher = fork(join(__dirname, 'watcher.js'), [ JSON.stringify(config), BuildMode.Development ])
   }
 }
@@ -47,7 +51,7 @@ async function deployStart ({ inventory: { inv } }) {
 
   // build the thing
   if (arc[MY_NAME]) {
-    const config = await generateConfig(inv)
+    const config = await createFinalRemixConfig(inv)
     createServerHandler(inv)
     await remixCompiler.build(config, { mode: BuildMode.Production })
   }
@@ -60,18 +64,16 @@ module.exports = {
   deploy: {
     start: deployStart,
     async end ({ inventory: { inv } }) {
+      console.log('Arc is cleaning up local Remix artifacts...')
       cleanup(inv)
     },
   },
   sandbox: {
     start: sandboxStart,
     async end ({ inventory: { inv } }) {
-      console.log('Arc is cleaning up Remix artifacts...')
+      console.log('Arc is cleaning up local Remix artifacts...')
 
-      if (watcher) {
-        watcher.kill()
-      }
-
+      if (watcher) watcher.kill()
       cleanup(inv)
     },
   },
