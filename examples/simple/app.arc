@@ -1,5 +1,5 @@
 @app
-arc-remix
+arc-remix-example-simple
 
 @plugins
 architect/plugin-remix

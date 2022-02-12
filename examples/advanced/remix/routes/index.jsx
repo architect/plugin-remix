@@ -1,4 +1,4 @@
-import { useLoaderData, json } from 'remix';
+import { useLoaderData, json, Link } from 'remix';
 
 // Loaders provide data to components and are only ever called on the server, so
 // you can connect to a database or run any server side code you want right next
@@ -51,6 +51,8 @@ export default function Index() {
         </p>
       </main>
       <aside>
+        <h2>A nested route</h2>
+        <Link to="demos/about" prefetch="intent">About Us</Link>
         <h2>Resources</h2>
         <ul>
           {data.resources.map((resource) => (

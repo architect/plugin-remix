@@ -1,5 +1,5 @@
 {
-  "name": "arc-remix",
+  "name": "arc-remix-example-simple",
   "scripts": {
     "postinstall": "remix setup node",
     "build": "remix build",
@@ -12,8 +12,8 @@
     "remix": "^1.1.3"
   },
   "devDependencies": {
-    "@architect/architect": "10.0.0",
-    "@architect/plugin-remix": "1.0.0",
+    "@architect/architect": "^10.0.0-RC.7",
+    "@architect/plugin-remix": "^0.1.0",
     "@remix-run/dev": "^1.1.3",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11"
