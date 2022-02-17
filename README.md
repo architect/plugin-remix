@@ -73,7 +73,7 @@ Based on plugin defaults and plugin configuration (via `@remix` in `app.arc`), t
 appDirectory
 assetsBuildDirectory
 cacheDirectory
-serverBuildDirectory
+serverBuildPath
 publicPath
 ```
 

@@ -15,12 +15,10 @@ const remixCompiler = require('@remix-run/dev/compiler')
 let watcher
 
 function setHttp ({ inventory: { inv } }) {
-  const {
-    _project: { arc },
-  } = inv
+  const { _project } = inv
 
-  if (arc[MY_NAME]) {
-    const { pluginConfig } = createPluginConfigs(arc)
+  if (_project.arc[MY_NAME]) {
+    const { pluginConfig } = createPluginConfigs(_project)
 
     return {
       method: 'any',
