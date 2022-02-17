@@ -20,7 +20,6 @@ const PLUGIN_DEFAULTS = {
   serverDirectory: `${BUILD_DIR}/server`,
   serverHandler: join(__dirname, 'server', 'handler'),
   serverPackage: join(__dirname, 'server', 'package'),
-  persistBuild: false,
 }
 
 module.exports = {

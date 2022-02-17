@@ -1,9 +1,7 @@
 const { fork, execSync } = require('child_process')
-const { copyFileSync } = require('fs')
 const { join } = require('path')
 const { MY_NAME } = require('./constants')
 const {
-  cleanup,
   createServerHandler,
   createFinalRemixConfig,
   createPluginConfigs
@@ -16,13 +14,10 @@ const remixCompiler = require('@remix-run/dev/compiler')
 let watcher
 
 function setHttp ({ inventory: { inv } }) {
+  // ! keep this function fast
   const { _project } = inv
 
   if (_project.arc[MY_NAME]) {
-    // ! keep this function fast
-    // make sure handler directory exists
-    createServerHandler(inv, { skipHandler: true })
-
     const { pluginConfig } = createPluginConfigs(_project)
 
     return {
@@ -57,13 +52,14 @@ async function deployStart ({ inventory: { inv } }) {
   if (_project.arc[MY_NAME]) {
     console.log('Building Remix app for deployment...')
 
-    const { pluginConfig } = createPluginConfigs(_project)
     const config = await createFinalRemixConfig(inv)
 
     createServerHandler(inv)
     await remixCompiler.build(config, { mode: BuildMode.Production })
-    // TODO: hydrate the Remix server function
-    copyFileSync(pluginConfig.serverPackage, join(pluginConfig.serverDirectory, 'package.json'))
+
+    // hydrate the Remix server function
+    // TODO: use Arc's hydrate?
+    const { pluginConfig } = createPluginConfigs(_project)
     await execSync(`cd ${pluginConfig.serverDirectory} && npm i`, { stdio: 'inherit' })
   }
 }
@@ -74,15 +70,11 @@ module.exports = {
   },
   deploy: {
     start: deployStart,
-    async end ({ inventory: { inv } }) {
-      cleanup(inv)
-    },
   },
   sandbox: {
     start: sandboxStart,
-    async end ({ inventory: { inv } }) {
+    async end () {
       if (watcher) watcher.kill()
-      cleanup(inv)
     },
   },
 }

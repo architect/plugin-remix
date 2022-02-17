@@ -28,9 +28,6 @@ function createPluginConfigs (project) {
       else if (name === 'mount') {
         pluginConfig.mount = value
       }
-      else if (name === 'persist-build') {
-        pluginConfig.persistBuild = value
-      }
       else if (name === 'server-handler') {
         pluginConfig.serverHandler = value
       }
@@ -70,6 +67,7 @@ function createServerHandler (inv, options = {}) {
   if (skipHandler) return
 
   copyFileSync(pluginConfig.serverHandler, join(pluginConfig.serverDirectory, 'index.js'))
+  copyFileSync(pluginConfig.serverPackage, join(pluginConfig.serverDirectory, 'package.json'))
 }
 
 /**
@@ -98,8 +96,6 @@ async function createFinalRemixConfig (inv) {
  */
 function cleanup (inv) {
   const { initialRemixConfig, pluginConfig } = createPluginConfigs(inv._project)
-
-  if (pluginConfig.persistBuild) return
 
   console.log('Sandbox is cleaning up local Remix artifacts...')
 
