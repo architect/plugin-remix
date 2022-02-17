@@ -16,7 +16,10 @@ jobs:
     strategy:
       matrix:
         node-version: [ 14.x, 16.x ]
-        os: [ windows-latest, ubuntu-latest, macOS-latest ]
+        os:
+          - ubuntu-latest
+          # - windows-latest
+          # - macOS-latest
 
     # Go
     steps:
@@ -38,7 +41,7 @@ jobs:
         VER=`npm --version`; echo "npm ver:    $VER"
 
     - name: Install
-      run: npm install
+      run: npm install --legacy-peer-deps
 
     - name: Test
       run: npm test

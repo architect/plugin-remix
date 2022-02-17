@@ -6,6 +6,8 @@
 
 [![GitHub CI status](https://github.com/architect/plugin-remix/workflows/Node%20CI/badge.svg)](https://github.com/architect/plugin-remix/actions?query=workflow%3A%22Node+CI%22)
 
+> ⚠️  This plugin is in a bit of flux. The focus is Architect 10 (shipping soon!) + Remix 1.2 compatibility. See [requirements](#requirements) for temporary workarounds.
+
 ## Install
 
 Into your existing Architect project:
@@ -30,6 +32,22 @@ Create a `remix.config.js` in your Architect project root:
 
 module.exports = {}
 ```
+
+## Requirements
+
+These are a bit odd while Architect works toward a v10 release and Remix updates. But if you'd like to test it out right now...
+
+`package.json` should have:
+
+- Architect 10 (currently in RC stage)
+- Peer dependencies:
+  - `@architect/architect` v10+
+  - `@remix-run/architect`
+- Override `@architect/functions` to v5+
+  - temporary until `@remix-run/architect` is updated
+- `"postinstall": "remix setup node"`
+
+See examples/ for sample apps.
 
 ## Examples
 
@@ -73,8 +91,8 @@ Based on plugin defaults and plugin configuration (via `@remix` in `app.arc`), t
 appDirectory
 assetsBuildDirectory
 cacheDirectory
-serverBuildPath
 publicPath
+serverBuildPath
 ```
 
 ## Known Issues

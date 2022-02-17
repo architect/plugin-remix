@@ -8,7 +8,6 @@ const REMIX_OVERRIDES = {
   assetsBuildDirectory: `./public/${BUILD_DIR}/`,
   cacheDirectory: `${BUILD_DIR}/.cache/`,
   publicPath: `/_static/${BUILD_DIR}/`,
-  server: null,
   serverBuildPath: `./${BUILD_DIR}/server/build.js`,
   serverBuildTarget: 'arc',
 }

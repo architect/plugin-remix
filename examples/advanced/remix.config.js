@@ -6,9 +6,9 @@ module.exports = {
   // this option must be set to match
   appDirectory: 'remix', // defaults to "app"
   // these settings are controlled by plugin-remix and will have no effect:
-  assetsBuildDirectory: 'public/.remix/',
-  cacheDirectory: '.remix/.cache/',
-  serverBuildDirectory: '.remix/server/build/',
+  assetsBuildDirectory: './public/.remix/',
+  cacheDirectory: './.remix/.cache/',
+  serverBuildPath: './.remix/server/build.js',
   publicPath: '/_static/.remix/',
   // other Remix options are respected:
   ignoredRouteFiles: [ '.*' ],

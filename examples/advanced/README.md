@@ -17,7 +17,7 @@ server-handler custom-remix-handler.js
 
 ### remix.config.js
 
-Since `app-directory` is set in app.arc, it is required to mirror this setting in Remix configuration:
+Since `app-directory` is set in app.arc, this setting should be mirrored in Remix configuration:
 
 ```js
 module.exports = {
