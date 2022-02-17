@@ -18,7 +18,9 @@ const PLUGIN_DEFAULTS = {
   appDirectory: REMIX_OVERRIDES.appDirectory,
   buildDirectory: BUILD_DIR,
   serverDirectory: `${BUILD_DIR}/server`,
-  serverHandler: join(__dirname, 'server', 'index.js'),
+  serverHandler: join(__dirname, 'server', 'handler'),
+  serverPackage: join(__dirname, 'server', 'package'),
+  persistBuild: false,
 }
 
 module.exports = {

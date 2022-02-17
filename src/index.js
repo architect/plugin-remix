@@ -1,4 +1,5 @@
-const { fork } = require('child_process')
+const { fork, execSync } = require('child_process')
+const { copyFileSync } = require('fs')
 const { join } = require('path')
 const { MY_NAME } = require('./constants')
 const {
@@ -18,6 +19,10 @@ function setHttp ({ inventory: { inv } }) {
   const { _project } = inv
 
   if (_project.arc[MY_NAME]) {
+    // ! keep this function fast
+    // make sure handler directory exists
+    createServerHandler(inv, { skipHandler: true })
+
     const { pluginConfig } = createPluginConfigs(_project)
 
     return {
@@ -34,9 +39,10 @@ async function sandboxStart ({ inventory: { inv } }) {
   } = inv
 
   if (arc[MY_NAME]) {
-    console.log('Arc is starting Remix watch...')
+    console.log('Sandbox is starting Remix watch...')
 
     const config = await createFinalRemixConfig(inv)
+
     createServerHandler(inv)
     watcher = fork(join(__dirname, 'watcher.js'), [ JSON.stringify(config), BuildMode.Development ])
   }
@@ -44,14 +50,21 @@ async function sandboxStart ({ inventory: { inv } }) {
 
 async function deployStart ({ inventory: { inv } }) {
   const {
-    _project: { arc },
+    _project
   } = inv
 
-  // build the thing
-  if (arc[MY_NAME]) {
+  // Build Remix client and server
+  if (_project.arc[MY_NAME]) {
+    console.log('Building Remix app for deployment...')
+
+    const { pluginConfig } = createPluginConfigs(_project)
     const config = await createFinalRemixConfig(inv)
+
     createServerHandler(inv)
     await remixCompiler.build(config, { mode: BuildMode.Production })
+    // TODO: hydrate the Remix server function
+    copyFileSync(pluginConfig.serverPackage, join(pluginConfig.serverDirectory, 'package.json'))
+    await execSync(`cd ${pluginConfig.serverDirectory} && npm i`, { stdio: 'inherit' })
   }
 }
 
@@ -62,15 +75,12 @@ module.exports = {
   deploy: {
     start: deployStart,
     async end ({ inventory: { inv } }) {
-      console.log('Arc is cleaning up local Remix artifacts...')
       cleanup(inv)
     },
   },
   sandbox: {
     start: sandboxStart,
     async end ({ inventory: { inv } }) {
-      console.log('Arc is cleaning up local Remix artifacts...')
-
       if (watcher) watcher.kill()
       cleanup(inv)
     },

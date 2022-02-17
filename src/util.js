@@ -28,6 +28,9 @@ function createPluginConfigs (project) {
       else if (name === 'mount') {
         pluginConfig.mount = value
       }
+      else if (name === 'persist-build') {
+        pluginConfig.persistBuild = value
+      }
       else if (name === 'server-handler') {
         pluginConfig.serverHandler = value
       }
@@ -54,13 +57,17 @@ function createPluginConfigs (project) {
 /**
  * Create Arc handler for Remix server
  * @param {*} inv
+ * @param {object} options
  * @returns {void}
  */
-function createServerHandler (inv) {
+function createServerHandler (inv, options = {}) {
+  const { skipHandler = false } = options
   const { pluginConfig } = createPluginConfigs(inv._project)
 
   if (!existsSync(pluginConfig.serverDirectory))
     mkdirSync(pluginConfig.serverDirectory, { recursive: true })
+
+  if (skipHandler) return
 
   copyFileSync(pluginConfig.serverHandler, join(pluginConfig.serverDirectory, 'index.js'))
 }
@@ -91,6 +98,10 @@ async function createFinalRemixConfig (inv) {
  */
 function cleanup (inv) {
   const { initialRemixConfig, pluginConfig } = createPluginConfigs(inv._project)
+
+  if (pluginConfig.persistBuild) return
+
+  console.log('Sandbox is cleaning up local Remix artifacts...')
 
   rmSync(initialRemixConfig.assetsBuildDirectory, { recursive: true, force: true })
   rmSync(pluginConfig.buildDirectory, { recursive: true, force: true })

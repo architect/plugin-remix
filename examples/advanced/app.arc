@@ -5,8 +5,10 @@ arc-remix-example-advanced
 architect/plugin-remix
 
 @remix
+# mount /remix
 app-directory remix
 build-directory .build
 server-handler custom-remix-handler.js
+# persist-build true
 
 @static

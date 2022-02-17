@@ -5,7 +5,7 @@
     "start": "npx arc sandbox"
   },
   "overrides": {
-    "@architect/functions": "5.0.1-RC.0"
+    "@architect/functions": "5.0.1"
   },
   "dependencies": {
     "@remix-run/architect": "^1.2.1",
