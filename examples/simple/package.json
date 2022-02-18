@@ -6,11 +6,8 @@
   },
   "overrides": {
     "@remix-run/architect": {
-      "@architect/functions": "5.0.1"
-    },
-    "@architect/architect": {
-      "@architect/deploy": "4.0.2-RC.0",
-      "@architect/hydrate": "3.0.1-RC.0"
+      "@architect/functions": "5.0.1",
+      "@architect/architect": "^10.0.0-RC.9"
     }
   },
   "dependencies": {
@@ -21,7 +18,7 @@
     "remix": "^1.2.1"
   },
   "devDependencies": {
-    "@architect/architect": "^10.0.0-RC.8",
+    "@architect/architect": "^10.0.0-RC.9",
     "@architect/plugin-remix": "file:../../",
     "@remix-run/dev": "^1.2.1",
     "@types/react": "^17.0.39",
