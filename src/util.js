@@ -76,9 +76,7 @@ function createServerHandler (inv, options = {}) {
  * @returns {Promise<remixConfig.RemixConfig>}
  */
 async function createFinalRemixConfig (inv) {
-  const {
-    _project,
-  } = inv
+  const { _project } = inv
 
   const existingConfig = await remixConfig.readConfig(_project.cwd)
   const { initialRemixConfig } = createPluginConfigs(_project)

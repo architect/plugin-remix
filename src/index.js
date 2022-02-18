@@ -1,4 +1,4 @@
-const { fork, execSync } = require('child_process')
+const { fork } = require('child_process')
 const { join } = require('path')
 const { MY_NAME } = require('./constants')
 const {
@@ -29,9 +29,7 @@ function setHttp ({ inventory: { inv } }) {
 }
 
 async function sandboxStart ({ inventory: { inv } }) {
-  const {
-    _project: { arc },
-  } = inv
+  const { _project: { arc } } = inv
 
   if (arc[MY_NAME]) {
     console.log('Sandbox is starting Remix watch...')
@@ -44,9 +42,7 @@ async function sandboxStart ({ inventory: { inv } }) {
 }
 
 async function deployStart ({ inventory: { inv } }) {
-  const {
-    _project
-  } = inv
+  const { _project } = inv
 
   // Build Remix client and server
   if (_project.arc[MY_NAME]) {
@@ -56,11 +52,6 @@ async function deployStart ({ inventory: { inv } }) {
 
     createServerHandler(inv)
     await remixCompiler.build(config, { mode: BuildMode.Production })
-
-    // hydrate the Remix server function
-    // TODO: use Arc's hydrate?
-    const { pluginConfig } = createPluginConfigs(_project)
-    await execSync(`cd ${pluginConfig.serverDirectory} && npm i`, { stdio: 'inherit' })
   }
 }
 

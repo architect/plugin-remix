@@ -6,6 +6,6 @@ console.log('Hello from Architect!')
 
 const { createRequestHandler } = require('@remix-run/architect')
 exports.handler = createRequestHandler({
-  // Remix server build folder is always a sibling of this file
+  // Remix server build is always a sibling of this file
   build: require('./build'),
 })

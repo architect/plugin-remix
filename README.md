@@ -80,6 +80,7 @@ build-directory .remix
 - `app-directory` - folder path. Specify where your Remix app lives.
 - `build-directory` - folder name. Name of folder for both server and client builds.
 - `server-handler` - (advanced usage!) Javascript file path. Use a custom Lambda handler to load the Remix server. A recommended handler is provided by default when this option is not set.
+- `mount` - Broken! - Specify a route to mount the Remix server. WIP.
 
 ### Interaction with remix.config.js
 
@@ -97,4 +98,7 @@ serverBuildPath
 
 ## Known Issues
 
-- "`ExperimentalWarning: stream/web is an experimental feature.`" messages pollute the console. This is an issue upstream of Architect and Remix: https://github.com/remix-run/remix/issues/1141
+- "`ExperimentalWarning: stream/web is an experimental feature.`" messages pollute the console.
+  - This is an issue upstream of Architect and Remix: https://github.com/remix-run/remix/issues/1141
+- Architect Sandbox will warn "`Warning: You may have dependencies that could be inaccessible in production`" when the Remix server isn't hydrated.
+  - Either ignore or run `npx arc hydrate` after a Remix build has been run (via running Sandbox or an `arc deploy`)
