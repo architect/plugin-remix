@@ -1,6 +1,6 @@
 {
   "name": "@architect/plugin-remix",
-  "version": "0.1.0-RC.2",
+  "version": "0.1.0-RC.3",
   "description": "Architect 10+ plugin for Remix.",
   "main": "src/index.js",
   "scripts": {
