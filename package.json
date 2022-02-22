@@ -20,7 +20,7 @@
     "src/*"
   ],
   "dependencies": {
-    "@remix-run/dev": "^1.2.1"
+    "@remix-run/dev": "^1.2.2"
   },
   "devDependencies": {
     "@architect/eslint-config": "^2.0.1",
