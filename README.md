@@ -6,7 +6,7 @@
 
 [![GitHub CI status](https://github.com/architect/plugin-remix/workflows/Node%20CI/badge.svg)](https://github.com/architect/plugin-remix/actions?query=workflow%3A%22Node+CI%22)
 
-> ⚠️  This plugin is in a bit of flux. The focus is Architect 10 (shipping soon!) + Remix 1.2 compatibility. See [requirements](#requirements) for temporary workarounds.
+> ⚠️  This plugin is in a bit of flux. The focus is Architect 10 + Remix 1.2 compatibility.
 
 ## Install
 
@@ -39,10 +39,7 @@ These are a bit odd while Architect works toward a v10 release and Remix updates
 
 `package.json` should have:
 
-- Architect 10 (currently in RC stage)
-- Peer dependencies:
-  - `@architect/architect` v10+
-  - `@remix-run/architect`
+- Architect 10
 - Override `@architect/functions` to v5+
   - temporary until `@remix-run/architect` is updated
 - `"postinstall": "remix setup node"`
@@ -98,6 +95,7 @@ serverBuildPath
 
 ## Known Issues
 
+- `createArcTableSessionStorage` from `@remix-run/architect` hasn't been validated in this plugin yet.
 - "`ExperimentalWarning: stream/web is an experimental feature.`" messages pollute the console.
   - This is an issue upstream of Architect and Remix: https://github.com/remix-run/remix/issues/1141
 - Architect Sandbox will warn "`Warning: You may have dependencies that could be inaccessible in production`" when the Remix server isn't hydrated.
