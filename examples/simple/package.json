@@ -4,24 +4,18 @@
     "postinstall": "remix setup node",
     "start": "npx arc sandbox"
   },
-  "overrides": {
-    "@remix-run/architect": {
-      "@architect/functions": "5.0.2",
-      "@architect/architect": "^10.0.0"
-    }
-  },
   "dependencies": {
-    "@remix-run/architect": "^1.2.2",
-    "@remix-run/react": "^1.2.2",
+    "@remix-run/architect": "^1.2.3",
+    "@remix-run/react": "^1.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remix": "^1.2.2"
+    "remix": "^1.2.3"
   },
   "devDependencies": {
-    "@architect/architect": "^10.0.0",
+    "@architect/architect": "^10.1.0",
     "@architect/plugin-remix": "file:../../",
-    "@remix-run/dev": "^1.2.2",
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.11"
+    "@remix-run/dev": "^1.2.3",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13"
   }
 }

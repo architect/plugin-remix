@@ -67,7 +67,6 @@ function createServerHandler (inv, options = {}) {
   if (skipHandler) return
 
   copyFileSync(pluginConfig.serverHandler, join(pluginConfig.serverDirectory, 'index.js'))
-  copyFileSync(pluginConfig.serverPackage, join(pluginConfig.serverDirectory, 'package.json'))
 }
 
 /**
@@ -103,7 +102,7 @@ function cleanup (inv) {
 
 module.exports = {
   cleanup,
-  createServerHandler,
   createFinalRemixConfig,
   createPluginConfigs,
+  createServerHandler,
 }

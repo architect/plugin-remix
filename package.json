@@ -4,8 +4,8 @@
   "description": "Architect 10+ plugin for Remix.",
   "main": "src/index.js",
   "scripts": {
-    "lint": "eslint ./src --fix",
-    "test": "npm run lint && tape test/* | tap-arc"
+    "lint": "eslint src test --fix",
+    "test": "npm run lint && tape test/*-test.js | tap-arc"
   },
   "engines": {
     "node": ">=14"
@@ -20,11 +20,11 @@
     "src/*"
   ],
   "dependencies": {
-    "@remix-run/dev": "^1.2.2"
+    "@remix-run/dev": "^1.2.3"
   },
   "devDependencies": {
     "@architect/eslint-config": "^2.0.1",
-    "eslint": "^8.9.0",
+    "eslint": "^8.10.0",
     "tap-arc": "^0.1.2",
     "tape": "^5.5.2"
   },
