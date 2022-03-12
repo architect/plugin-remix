@@ -1,10 +1,8 @@
-<div style="width:500px">
+<h1 align="center">
 
-[![Architect](https://assets.arc.codes/architect-logo-light-500b@2x.png#gh-dark-mode-only)](https://arc.codes)
+  [<img src="https://assets.arc.codes/architect-logo-500b@2x.png" width="500">](https://arc.codes)
 
-[![Architect](https://assets.arc.codes/architect-logo-500b@2x.png#gh-light-mode-only)](https://arc.codes)
-
-</div>
+</h1>
 
 ## [`@architect/plugin-remix`](https://www.npmjs.com/package/@architect/plugin-remix)
 
@@ -12,9 +10,9 @@
 
 [![GitHub CI status](https://github.com/architect/plugin-remix/workflows/Node%20CI/badge.svg)](https://github.com/architect/plugin-remix/actions?query=workflow%3A%22Node+CI%22)
 
-> ⚠️  This plugin is still pre-v1. Give it a go and provide any feedback by filing an issue.
-
 ## Install
+
+> ⚠️  This plugin is still pre-v1. Give it a go and provide any feedback by filing an issue.
 
 Into your existing Architect project:
 
