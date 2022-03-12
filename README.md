@@ -1,4 +1,10 @@
-[<img src="https://assets.arc.codes/architect-logo-500b@2x.png" width=500>](https://www.npmjs.com/package/@architect/plugin-remix)
+<div style="width:500px">
+
+[![Architect](https://assets.arc.codes/architect-logo-light-500b@2x.png#gh-dark-mode-only)](https://arc.codes)
+
+[![Architect](https://assets.arc.codes/architect-logo-500b@2x.png#gh-light-mode-only)](https://arc.codes)
+
+</div>
 
 ## [`@architect/plugin-remix`](https://www.npmjs.com/package/@architect/plugin-remix)
 
@@ -6,7 +12,7 @@
 
 [![GitHub CI status](https://github.com/architect/plugin-remix/workflows/Node%20CI/badge.svg)](https://github.com/architect/plugin-remix/actions?query=workflow%3A%22Node+CI%22)
 
-> ⚠️  This plugin is in a bit of flux. The focus is Architect 10 + Remix 1.2 compatibility.
+> ⚠️  This plugin is still pre-v1. Give it a go and provide any feedback by filing an issue.
 
 ## Install
 
@@ -35,18 +41,11 @@ module.exports = {}
 
 ## Requirements
 
-These are a bit odd while Architect works toward a v10 release and Remix updates. But if you'd like to test it out right now...
-
-`package.json` should have:
-
-- Architect 10
-- Override `@architect/functions` to v5+
-  - temporary until `@remix-run/architect` is updated
-- `"postinstall": "remix setup node"`
-
-See examples/ for sample apps.
+Architect 10+
 
 ## Examples
+
+See examples/ for sample apps.
 
 - [Simple app](https://github.com/architect/plugin-remix/tree/main/examples/simple): A baseline app without custom configuration.
 - [Advanced app](https://github.com/architect/plugin-remix/tree/main/examples/advanced): An example that uses all plugin options with a slightly more complex Remix app.
@@ -99,4 +98,4 @@ serverBuildPath
 - "`ExperimentalWarning: stream/web is an experimental feature.`" messages pollute the console.
   - This is an issue upstream of Architect and Remix: https://github.com/remix-run/remix/issues/1141
 - Architect Sandbox will warn "`Warning: You may have dependencies that could be inaccessible in production`" when the Remix server isn't hydrated.
-  - Either ignore or run `npx arc hydrate` after a Remix build has been run (via running Sandbox or an `arc deploy`)
+  - Either ignore or run `npx arc hydrate` after an initial Remix build has been run (via running Sandbox or an `arc deploy`)
