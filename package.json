@@ -20,6 +20,7 @@
     "src/*"
   ],
   "dependencies": {
+    "@remix-run/architect": "^1.2.3",
     "@remix-run/dev": "^1.2.3"
   },
   "devDependencies": {
