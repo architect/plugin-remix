@@ -1,4 +1,4 @@
-import * as React from "react";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Link,
   Links,
@@ -8,12 +8,13 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-  useLocation
-} from "remix";
+  useLocation,
+} from "@remix-run/react";
+import * as React from "react";
 
-import deleteMeRemixStyles from "./styles/demos/remix.css";
-import globalStylesUrl from "./styles/global.css";
-import darkStylesUrl from "./styles/dark.css";
+import deleteMeRemixStyles from "~/styles/demos/remix.css";
+import globalStylesUrl from "~/styles/global.css";
+import darkStylesUrl from "~/styles/dark.css";
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -23,18 +24,22 @@ import darkStylesUrl from "./styles/dark.css";
  *
  * https://remix.run/api/app#links
  */
-export const links = () => {
+export const links: LinksFunction = () => {
   return [
-    { rel: "icon",href: "/_static/favicon.ico" },
     { rel: "stylesheet", href: globalStylesUrl },
     {
       rel: "stylesheet",
       href: darkStylesUrl,
-      media: "(prefers-color-scheme: dark)"
+      media: "(prefers-color-scheme: dark)",
     },
-    { rel: "stylesheet", href: deleteMeRemixStyles }
+    { rel: "stylesheet", href: deleteMeRemixStyles },
   ];
 };
+
+export const meta: MetaFunction = () => ({
+  charset: "utf-8",
+  viewport: "width=device-width,initial-scale=1",
+});
 
 /**
  * The root module's default export is a component that renders the current
@@ -53,13 +58,14 @@ export default function App() {
 
 function Document({
   children,
-  title
+  title,
+}: {
+  children: React.ReactNode;
+  title?: string;
 }) {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
         {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
@@ -69,13 +75,13 @@ function Document({
         <RouteChangeAnnouncement />
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
+        <LiveReload />
       </body>
     </html>
   );
 }
 
-function Layout({ children }) {
+function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
     <div className="remix-app">
       <header className="remix-app__header">
@@ -145,7 +151,7 @@ export function CatchBoundary() {
   );
 }
 
-export function ErrorBoundary({ error }) {
+export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
   return (
     <Document title="Error!">
@@ -164,7 +170,7 @@ export function ErrorBoundary({ error }) {
   );
 }
 
-function RemixLogo(props) {
+function RemixLogo(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       viewBox="0 0 659 165"
@@ -236,10 +242,11 @@ const RouteChangeAnnouncement = React.memo(() => {
         position: "absolute",
         width: "1px",
         whiteSpace: "nowrap",
-        wordWrap: "normal"
+        wordWrap: "normal",
       }}
     >
       {innerHtml}
     </div>
   );
 });
+RouteChangeAnnouncement.displayName = "RouteChangeAnnouncement";

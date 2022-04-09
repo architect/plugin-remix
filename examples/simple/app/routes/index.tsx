@@ -1,48 +1,51 @@
-import { useLoaderData, json } from 'remix';
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 
-// Loaders provide data to components and are only ever called on the server, so
-// you can connect to a database or run any server side code you want right next
-// to the component that renders it.
-// https://remix.run/api/conventions#loader
-export const loader = async () => {
-  const data = {
+type IndexData = {
+  resources: Array<{ name: string; url: string }>;
+};
+
+export const loader: LoaderFunction = async () => {
+  const data: IndexData = {
     resources: [
       {
-        name: 'Remix Docs',
-        url: 'https://remix.run/docs',
+        name: "Remix Docs",
+        url: "https://remix.run/docs",
       },
       {
-        name: 'Architect Docs',
-        url: 'https://arc.codes',
+        name: "Architect Docs",
+        url: "https://arc.codes",
       },
       {
-        name: 'Remix Discord',
-        url: 'https://discord.gg/VBePs6d',
+        name: "Remix Discord",
+        url: "https://discord.gg/VBePs6d",
       },
+      {
+        name: "Architect Discord",
+        url: "https://discord.gg/y5A2eTsCRX",
+      }
     ],
   };
 
-  // https://remix.run/api/remix#json
   return json(data);
 };
 
-// https://remix.run/api/conventions#meta
-export const meta = () => {
+export const meta: MetaFunction = () => {
   return {
-    title: 'Architect + Remix Starter',
-    description: 'Welcome to remix',
+    title: "Architect + Remix Starter",
+    description: "Welcome to Arc + Remix",
   };
 };
 
-// https://remix.run/guides/routing#index-routes
 export default function Index() {
-  const data = useLoaderData();
+  const data = useLoaderData<IndexData>();
 
   return (
     <div className="remix__page">
       <main>
-        <h1>Welcome to Remix!</h1>
-        <h2>Running on Architect</h2>
+        <h2>Welcome to Remix!</h2>
+        <h3>Running on Architect</h3>
         <p>We're stoked that you're here. 🥳</p>
         <p>
           Feel free to take a look around the code to see how Remix does things, it might be a bit
