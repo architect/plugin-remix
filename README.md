@@ -1,8 +1,5 @@
-<h1 align="center">
-
-  [<img src="https://assets.arc.codes/architect-logo-500b@2x.png" width="500">](https://arc.codes)
-
-</h1>
+![Architect logo](https://github.com/architect/assets.arc.codes/raw/main/public/architect-logo-light-500b%402x.png#gh-dark-mode-only)
+![Architect logo](https://github.com/architect/assets.arc.codes/raw/main/public/architect-logo-500b%402x.png#gh-light-mode-only)
 
 ## [`@architect/plugin-remix`](https://www.npmjs.com/package/@architect/plugin-remix)
 
