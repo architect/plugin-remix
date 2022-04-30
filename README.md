@@ -1,7 +1,7 @@
-<h1 align="center">
+<div align="center">
   <img alt="Architect logo light" src="https://github.com/architect/assets.arc.codes/raw/main/public/architect-logo-light-500b%402x.png#gh-dark-mode-only" width="500" class="dn">
   <img alt="Architect logo" src="https://github.com/architect/assets.arc.codes/raw/main/public/architect-logo-500b%402x.png#gh-light-mode-only" width="500">
-</h1>
+</div>
 
 ## [`@architect/plugin-remix`](https://www.npmjs.com/package/@architect/plugin-remix)
 
