@@ -1,5 +1,5 @@
-![Architect logo](https://github.com/architect/assets.arc.codes/raw/main/public/architect-logo-light-500b%402x.png#gh-dark-mode-only)
-![Architect logo](https://github.com/architect/assets.arc.codes/raw/main/public/architect-logo-500b%402x.png#gh-light-mode-only)
+<img alt="Architect logo" style="max-width:100%;" src="https://github.com/architect/assets.arc.codes/raw/main/public/architect-logo-light-500b%402x.png#gh-dark-mode-only" class="dn">
+<img src="https://github.com/architect/assets.arc.codes/raw/main/public/architect-logo-500b%402x.png#gh-light-mode-only" alt="Architect logo" style="max-width:100%;">
 
 ## [`@architect/plugin-remix`](https://www.npmjs.com/package/@architect/plugin-remix)
 
