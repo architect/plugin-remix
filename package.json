@@ -20,12 +20,12 @@
     "src/*"
   ],
   "dependencies": {
-    "@remix-run/architect": "^1.4.1",
-    "@remix-run/dev": "^1.4.1"
+    "@remix-run/architect": "^1.4.3",
+    "@remix-run/dev": "^1.4.3"
   },
   "devDependencies": {
     "@architect/eslint-config": "^2.0.1",
-    "eslint": "^8.13.0",
+    "eslint": "^8.14.0",
     "tap-arc": "^0.3.4",
     "tape": "^5.5.3"
   },

@@ -4,16 +4,16 @@
     "start": "npx arc sandbox"
   },
   "dependencies": {
-    "@remix-run/node": "^1.4.1",
-    "@remix-run/react": "^1.4.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "@remix-run/node": "^1.4.3",
+    "@remix-run/react": "^1.4.3",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
-    "@architect/architect": "^10.2.2",
+    "@architect/architect": "^10.3.2",
     "@architect/plugin-remix": "file:../../",
-    "@remix-run/dev": "^1.4.1",
-    "@types/react": "^18.0.5",
-    "@types/react-dom": "^18.0.1"
+    "@remix-run/dev": "^1.4.3",
+    "@types/react": "^18.0.8",
+    "@types/react-dom": "^18.0.3"
   }
 }
